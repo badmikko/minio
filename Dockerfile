@@ -23,6 +23,10 @@ RUN \
   chmod +x /usr/bin/minio /usr/bin/mc /usr/bin/docker-entrypoint.sh && \
   echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.conf
 
+RUN \
+  /usr/bin/minio --version && \
+  /usr/bin/mc --version
+
 EXPOSE 9000
 
 ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
