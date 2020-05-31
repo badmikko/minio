@@ -16,10 +16,10 @@ RUN \
     *) echo "unsupported architecture"; exit 1 ;; \
   esac && \
   echo “Running on ${ARCH}” && \
-  apk add --no-cache ca-certificates 'curl>7.61.0' 'su-exec>=0.2' && \
+  apk add --no-cache ca-certificates 'curl>7.61.0' 'su-exec>=0.2' wget && \
   curl -o /usr/bin/minio https://dl.min.io/server/minio/release/linux-${ARCH}/minio && \
   curl -o /usr/bin/mc https://dl.min.io/client/mc/release/linux-${ARCH}/mc && \
-  curl -o /usr/bin/docker-entrypoint.sh https://github.com/minio/minio/raw/master/dockerscripts/docker-entrypoint.sh && \
+  wget -O /usr/bin/docker-entrypoint.sh https://github.com/minio/minio/raw/master/dockerscripts/docker-entrypoint.sh && \
   chmod +x /usr/bin/minio /usr/bin/mc /usr/bin/docker-entrypoint.sh && \
   echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.conf
 
