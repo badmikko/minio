@@ -9,7 +9,8 @@ ENV MINIO_ACCESS_KEY_FILE=access_key \
     MINIO_SSE_MASTER_KEY_FILE=sse_master_key
 
 RUN \
-  dpkgArch="$(dpkg --print-architecture)" && \
+  dpkgArch="$(uname -m)" && \
+  echo “Running on ${dpkgArch}” && \
   apk add --no-cache ca-certificates 'curl>7.61.0' 'su-exec>=0.2' && \
   curl https://dl.min.io/server/minio/release/linux-${dpkgArch}/minio > /usr/bin/minio && \
   curl https://dl.min.io/client/mc/release/linux-${dpkgArch}/mc > /usr/bin/mc && \
