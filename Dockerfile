@@ -10,11 +10,11 @@ ENV MINIO_ACCESS_KEY_FILE=access_key \
 
 RUN \
   dpkgArch="$(uname -m)" && \
-  && case "${dpkgArch##*-}" in \
+  case "${dpkgArch##*-}" in \
     x86_64) ARCH='amd64';; \
     aarch64) ARCH='arm64';; \
     *) echo "unsupported architecture"; exit 1 ;; \
-  esac \
+  esac && \
   echo “Running on ${ARCH}” && \
   apk add --no-cache ca-certificates 'curl>7.61.0' 'su-exec>=0.2' && \
   curl -o /usr/bin/minio https://dl.min.io/server/minio/release/linux-${ARCH}/minio && \
